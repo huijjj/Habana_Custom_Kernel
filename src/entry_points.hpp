@@ -1,5 +1,5 @@
 /**********************************************************************
-Copyright (c) 2023 Habana Labs.
+Copyright (c) 2024 Habana Labs.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
@@ -49,7 +49,7 @@ typedef enum
     GAUDI_KERNEL_GATHER_FWD_DIM0_I32,
     GAUDI_KERNEL_GATHER_FWD_DIM1_I32,
     GAUDI_KERNEL_KL_DIV_FWD_F32,
-    GAUDI_KERNEL_KL_DIV_BWD_F32,    
+    GAUDI_KERNEL_KL_DIV_BWD_F32,
 
     GAUDI_KERNEL_MAX_EXAMPLE_KERNEL
 
@@ -63,6 +63,12 @@ typedef enum
     GAUDI2_KERNEL_KL_DIV_FWD_F32,
     GAUDI2_KERNEL_SOFTMAX_FCD_BF16,
     GAUDI2_KERNEL_SOFTMAX_NONFCD_BF16,
+    GAUDI2_KERNEL_ADD_F32,
+    GAUDI2_KERNEL_RELU_FWD_F32,
+    GAUDI2_KERNEL_RELU_BWD_F32,
+    GAUDI2_KERNEL_RELU_FWD_BF16,
+    GAUDI2_KERNEL_RELU_BWD_BF16,    
+    GAUDI2_KERNEL_USER_LUT,
 
     GAUDI2_KERNEL_MAX_EXAMPLE_KERNEL
 
@@ -72,7 +78,7 @@ typedef enum
  ***************************************************************************************************
  *   @brief This function returns exported kernel names
  *
- *   @param deviceId    [in] The type of device E.g. dali/gaudi etc.* 
+ *   @param deviceId    [in] The type of device E.g. dali/gaudi etc.*
  *   @param kernelCount [in/out] The number of strings in 'names' argument.
  *                      If the list is too short, the library will return the
  *                      required list length.
@@ -98,7 +104,7 @@ tpc_lib_api::GlueCodeReturn
 InstantiateTpcKernel(_IN_  tpc_lib_api::HabanaKernelParams* params,
              _OUT_ tpc_lib_api::HabanaKernelInstantiation*instance);
 
-tpc_lib_api::GlueCodeReturn 
+tpc_lib_api::GlueCodeReturn
 GetShapeInference(_IN_ tpc_lib_api::DeviceId deviceId,  _IN_ tpc_lib_api::ShapeInferenceParams* inputParams,  _OUT_ tpc_lib_api::ShapeInferenceOutput* outputData);
 
 } // extern "C"

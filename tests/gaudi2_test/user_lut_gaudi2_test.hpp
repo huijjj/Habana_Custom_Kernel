@@ -14,4 +14,27 @@ OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY TH
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ********************************************************************/
 
-#include "add_f32.h"
+#ifndef USER_LUT_TEST_HPP
+#define USER_LUT_TEST_HPP
+
+#include "test_base.hpp"
+#include "tensor.h"
+
+class UserLutGaudi2Test : public TestBase
+{
+public:
+    UserLutGaudi2Test() {}
+    ~UserLutGaudi2Test() {}
+    int runTest();
+
+    inline static void user_lut_reference_implementation(
+            const float_1DTensor& input0,
+            const float_1DTensor& input1,
+            float_1DTensor& output);
+private:
+    UserLutGaudi2Test(const UserLutGaudi2Test& other) = delete;
+    UserLutGaudi2Test& operator=(const UserLutGaudi2Test& other) = delete;
+};
+
+
+#endif /* USER_LUT_TEST_HPP */

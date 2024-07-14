@@ -1,5 +1,5 @@
 /**********************************************************************
-Copyright (c) 2024 Habana Labs.
+Copyright (c) 2021 Habana Labs. All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
@@ -14,4 +14,38 @@ OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY TH
 NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ********************************************************************/
 
-#include "add_f32.h"
+#ifndef _RELU_ALL_GAUDI2_HPP
+#define _RELU_ALL_GAUDI2_HPP
+
+#include "gc_interface.h"
+#include "tpc_kernel_lib_interface.h"
+
+class ReluAllGaudi2
+{
+public:
+    typedef enum _Relu_mode_t
+    {
+        relu_fwd_f32,
+        relu_bwd_f32,
+        relu_fwd_bf16,
+        relu_bwd_bf16
+    } Relu_mode_t;
+
+    ReluAllGaudi2(Relu_mode_t mode=relu_fwd_f32) {m_mode = mode;}
+    virtual ~ReluAllGaudi2() {}
+
+    virtual tpc_lib_api::GlueCodeReturn GetGcDefinitions(
+            tpc_lib_api::HabanaKernelParams* params,
+            tpc_lib_api::HabanaKernelInstantiation* kernel);
+
+    virtual tpc_lib_api::GlueCodeReturn GetKernelName(
+            char kernelName [tpc_lib_api::MAX_NODE_NAME], Relu_mode_t mode);
+
+private:
+    Relu_mode_t m_mode;
+    ReluAllGaudi2(const ReluAllGaudi2& other) = delete;
+    ReluAllGaudi2& operator=(const ReluAllGaudi2& other) = delete;
+};
+
+
+#endif //_RELU_ALL_GAUDI2_HPP
